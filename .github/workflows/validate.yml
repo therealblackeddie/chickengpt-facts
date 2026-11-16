@@ -1,0 +1,48 @@
+name: Validate fact submission
+
+# Runs the validator from the main branch (trusted code) against the pull request's
+# facts.json, which is read as data only. Nothing from the pull request is executed.
+# No secrets are used; the token is read-only.
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: validate-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out main (trusted validator)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          persist-credentials: false
+
+      - name: Read the pull request's files as data
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          gh api "repos/$REPO/pulls/$PR/files" --paginate --jq '.[] | .filename + "\t" + .status' > /tmp/changed.tsv
+          cat /tmp/changed.tsv
+          git fetch --no-tags --depth=1 origin "+refs/pull/$PR/head:refs/remotes/pr/head"
+          if git cat-file -e "$HEAD_SHA:facts.json" 2>/dev/null; then
+            git show "$HEAD_SHA:facts.json" > /tmp/head-facts.json
+          else
+            echo '' > /tmp/head-facts.json
+          fi
+
+      - name: Validate
+        run: node scripts/validate.mjs --base facts.json --head /tmp/head-facts.json --changed /tmp/changed.tsv --check-urls --site https://chickengpt.net/
