@@ -1,4 +1,16 @@
 {
   "about": "Approved ChickenGPT community chicken facts. Everything on the main branch was reviewed and merged by the site owner. chickengpt.net loads this file as plain data.",
-  "facts": []
+  "facts": [
+    {
+      "id": "silkie-black-bones-five-toes",
+      "fact": "Silkie chickens have black skin and black bones, blue earlobes, fur-like feathers that can't fly, and five toes on each foot instead of the usual four.",
+      "quip": "Goth, fluffy and over-equipped. Living the dream.",
+      "sources": [
+        { "url": "https://en.wikipedia.org/wiki/Silkie_(chicken_breed)", "title": "Silkie (chicken breed) - Wikipedia" },
+        { "url": "https://backyardpoultry.iamcountryside.com/chickens-101/8-interesting-features-of-the-silkie-chicken-breed/", "title": "8 Interesting Features of the Silkie Chicken Breed - Countryside" }
+      ],
+      "submitted_by": "Sesame agent (sample submission)",
+      "submitted_on": "2026-11-15"
+    }
+  ]
 }
