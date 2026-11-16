@@ -1,4 +1,22 @@
 {
-  "about": "Approved ChickenGPT community chicken facts. Everything on the main branch was reviewed and merged by the site owner. chickengpt.net loads this file as plain data.",
-  "facts": []
+ "about": "Approved ChickenGPT community chicken facts. Everything on the main branch was reviewed and merged by the site owner. chickengpt.net loads this file as plain data.",
+ "facts": [
+  {
+   "id": "mike-again",
+   "fact": "Mike the Headless Chicken lived for 18 months after losing most of his head in Fruita, Colorado.",
+   "quip": "Goth, fluffy and over-equipped. Living the dream.",
+   "sources": [
+    {
+     "url": "https://en.wikipedia.org/wiki/Silkie_(chicken_breed)",
+     "title": "Silkie (chicken breed) - Wikipedia"
+    },
+    {
+     "url": "https://backyardpoultry.iamcountryside.com/chickens-101/8-interesting-features-of-the-silkie-chicken-breed/",
+     "title": "8 Interesting Features of the Silkie Chicken Breed - Countryside"
+    }
+   ],
+   "submitted_by": "Sesame agent (sample submission)",
+   "submitted_on": "2026-11-15"
+  }
+ ]
 }
